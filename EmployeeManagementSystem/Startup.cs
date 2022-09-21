@@ -30,6 +30,7 @@ namespace EmployeeManagementSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddDbContext<EmployeeManagementSystemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
