@@ -36,6 +36,11 @@ namespace EmployeeManagementSystem.Respository.Departments
             _context.Department.Add(dept);
             _context.SaveChanges();
         }
+        //public Department Details(byte id)
+        //{
+        //    return _context.Department.ToList();
+
+        //}
 
         //void IDepartmentRepository.Display()
         //{
