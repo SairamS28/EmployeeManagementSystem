@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
+using EmployeeManagementSystem.Respository.Departments;
 
 namespace EmployeeManagementSystem
 {
@@ -26,6 +27,7 @@ namespace EmployeeManagementSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddDbContext<EmployeeManagementSystemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
         }
 
@@ -48,6 +50,7 @@ namespace EmployeeManagementSystem
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
