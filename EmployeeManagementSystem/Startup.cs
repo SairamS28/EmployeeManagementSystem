@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
+using EmployeeManagementSystem.Respository.Employees;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace EmployeeManagementSystem
 {
@@ -26,7 +28,21 @@ namespace EmployeeManagementSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<EmployeeManagementSystemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
+            services.AddDbContext<EmployeeManagementSystemContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => {
+                    options.Cookie.Name = "MyCookie";
+                    options.LoginPath = "/Employee/login";
+                    options.SlidingExpiration = false;
+                   
+                });
+            services.AddSession(options => { 
+                options.IdleTimeout=TimeSpan.FromMinutes(15);
+                options.Cookie.IsEssential = true;
+               
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,14 +62,16 @@ namespace EmployeeManagementSystem
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Employee}/{action=Index}/{id?}");
             });
         }
     }
