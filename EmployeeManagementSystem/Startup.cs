@@ -12,6 +12,8 @@ using EmployeeManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using EmployeeManagementSystem.Respository.Admins;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using EmployeeManagementSystem.Respository.Employees;
+using EmployeeManagementSystem.Respository.Departments;
 
 namespace EmployeeManagementSystem
 {
@@ -30,6 +32,8 @@ namespace EmployeeManagementSystem
             services.AddControllersWithViews();
             services.AddDbContext<EmployeeManagementSystemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
             services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddSession(options=>options.IdleTimeout = TimeSpan.FromMinutes(10));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
                 options.Cookie.Name = "MyCookie";

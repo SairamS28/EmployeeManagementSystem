@@ -47,8 +47,19 @@
                
                 <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
                     <ul class="navbar-nav">
+                       @if (User.Identity.IsAuthenticated)
+                        {
+                           @if(User.IsInRole("Admin")){
+                               <li class="nav-item mx-4">
+                                   <a class="nav-link" asp-action="Getall" asp-controller="admin" asp-area="">Employee</a>
+                               </li>
+                               <li class="nav-item mx-4">
+                                   <a class="nav-link" asp-action="Display" asp-controller="Department" asp-area="">Department</a>
+                               </li>
+                           }
+                        }else{
                         <li class="nav-item mx-4">
-                            <a class="nav-link active" asp-action="Index" asp-controller="Home" asp-area="">Home</a>
+                            <a class="nav-link" asp-action="Index" asp-controller="Home" asp-area="">Home</a>
                         </li>
                         <li class="nav-item mx-4">
                             <a class="nav-link" asp-action="Contactus" asp-area="" asp-controller="Home">Contact</a>
@@ -62,6 +73,8 @@
                         <li class="nav-item mx-4">
                             <a class="nav-link" asp-area="" asp-controller="Employee" asp-action="login">Employee Login</a>
                         </li>
+                        }
+
                     </ul>
                 </div>
             </div>
