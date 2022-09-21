@@ -3,6 +3,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-<a asp-action="ViewDetails">Details </a>
+
+
+<h2 class="text-center">Welcome @ViewBag.user</h2>
+
+
+@*@if (User.Identity.IsAuthenticated)
+{
+    <p>kfldklfdjdlf</p>
+    if (User.IsInRole("Employee"))
+    {
+        <p>This is User</p>
+    }
+}*@
 

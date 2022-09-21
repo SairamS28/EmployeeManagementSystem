@@ -9,9 +9,12 @@ using System.Net.Http;
 using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private IEmployeeRepository _repo;
@@ -21,15 +24,18 @@ namespace EmployeeManagementSystem.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.user = HttpContext.Session.GetString("email");
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Register(Employee employee)
         {
             Random r = new Random(); 
@@ -45,12 +51,14 @@ namespace EmployeeManagementSystem.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Login(Login employee)
         {
             var result = _repo.EmployeeLogin(employee);
@@ -78,12 +86,19 @@ namespace EmployeeManagementSystem.Controllers
                     }
                         );
 
+
                     return RedirectToAction("index");
                 }
                 ModelState.AddModelError(string.Empty, "Invalid username and password");
 
             }
             return View();
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
         }
 
         public IActionResult ViewDetails()

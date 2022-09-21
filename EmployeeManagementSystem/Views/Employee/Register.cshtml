@@ -4,20 +4,86 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
+<section class="vh-100 bg-image"
+         style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Employee Registration</h2>
 
-<h4>Employee</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Register">
+                            <form asp-action="Register">
+                                @ViewBag.message
+
+                                <div class="form-outline mb-4">
+                                    <label asp-for="Name" class="form-label">Your Name</label>
+                                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="Email">Your Email</label>
+                                    <input asp-for="Email" type="email" id="form3Example3cg" class="form-control form-control-lg" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="Password">Password</label>
+                                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="ConfirmPassword">Repeat your password</label>
+                                    <input asp-for="ConfirmPassword" id="form3Example4cdg" class="form-control form-control-lg" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label asp-for="Mobile" class="control-label"></label>
+                                <input asp-for="Mobile" id="form3Example4cdg" class="form-control form-control-lg" />
+                                <span asp-validation-for="Mobile" class="text-danger"></span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label asp-for="Address" class="control-label"></label>
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                </div>
+                                 <div class="form-outline mb-4">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                </div>
+                               
+                                <div class="d-flex justify-content-center">
+                                    <button type="button"
+                                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+                                        Register
+                                    </button>
+                                </div>
+
+                                <p class="text-center text-muted mt-5 mb-0">
+                                    Have an account already? <a href="#!"
+                                                                class="fw-bold text-body"><u>Login here</u></a>
+                                </p>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+       @* <form asp-action="Register">
             @ViewBag.message
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="Empid" class="control-label"></label>
-                <input asp-for="Empid" class="form-control" />
-                <span asp-validation-for="Empid" class="text-danger"></span>
-            </div>*@
+           
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -36,7 +102,7 @@
            @* <div class="form-group">
                 <label asp-for="Departmentid" class="control-label"></label>
                 <select asp-for="Departmentid" class ="form-control" asp-items="ViewBag.Departmentid"></select>
-            </div>*@
+            </div>
             <div class="form-group">
                 <label asp-for="Address" class="control-label"></label>
                 <input asp-for="Address" class="form-control" />
@@ -55,17 +121,15 @@
            @* <div class="form-group">
                 <label asp-for="Managerid" class="control-label"></label>
                 <select asp-for="Managerid" class ="form-control" asp-items="ViewBag.Managerid"></select>
-            </div>*@
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
+</div>*@
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
