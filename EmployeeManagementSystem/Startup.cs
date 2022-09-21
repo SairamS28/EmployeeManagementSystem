@@ -10,7 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
-using EmployeeManagementSystem.Respository.Departments;
+using EmployeeManagementSystem.Respository.Admins;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace EmployeeManagementSystem
 {
@@ -29,11 +30,22 @@ namespace EmployeeManagementSystem
             services.AddControllersWithViews();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddDbContext<EmployeeManagementSystemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
+            services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddSession(options=>options.IdleTimeout = TimeSpan.FromMinutes(10));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+                options.Cookie.Name = "MyCookie";
+                options.LoginPath = "/Admin/login";
+                options.SlidingExpiration = false;
+                
+            });
+
+         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -48,10 +60,10 @@ namespace EmployeeManagementSystem
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthorization();
             app.UseAuthentication();
-
+            app.UseAuthorization();
+            app.UseSession();
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
