@@ -10,6 +10,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
+using EmployeeManagementSystem.Respository.Admins;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using EmployeeManagementSystem.Respository.Employees;
+using EmployeeManagementSystem.Respository.Departments;
 using EmployeeManagementSystem.Respository.Employees;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -43,11 +47,24 @@ namespace EmployeeManagementSystem
                 options.Cookie.IsEssential = true;
                
             });
+            services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddSession(options=>options.IdleTimeout = TimeSpan.FromMinutes(10));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+                options.Cookie.Name = "MyCookie";
+                options.LoginPath = "/Admin/login";
+                options.SlidingExpiration = false;
+                
+            });
+
+         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

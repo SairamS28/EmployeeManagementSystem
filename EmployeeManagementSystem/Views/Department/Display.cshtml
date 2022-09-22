@@ -4,15 +4,15 @@
     ViewData["Title"] = "Display";
 }
 
-<h1>Display</h1>
+<h1 align="center">Department Details</h1>
 
-<p>
+<p align="center">
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table" border=2px margin=25px 50px 75px 100px align="center">
+    <thead class="table-active" align="center">
         <tr>
-            <th>
+            <th align ="center">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th></th>
@@ -20,13 +20,13 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
+            <tr align="center">
+                <td align="center">
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
+                <td align="center">
                 <a asp-action="Update" asp-route-id="@item.Departmentid">Edit</a> |
-                <a asp-action="Display" asp-route-id="@item.Departmentid">Details</a> |
+                <a asp-action="GetByID" asp-route-id="@item.Departmentid">Details</a> |
 @*                <a asp-action="Delete" asp-route-id="@item.Departmentid">Delete</a>*@
             </td>
         </tr>

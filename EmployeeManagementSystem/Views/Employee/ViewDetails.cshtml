@@ -4,9 +4,50 @@
     ViewData["Title"] = "ViewDetails";
 }
 
+@*
+<div class="m-4">
 
-<div>
-   
+    <table class="table table-hover h-60">
+
+        <thead>
+
+            <tr class="table-active">
+                <th>@Html.DisplayNameFor(model=>model.Name)</th>
+                <th>@Html.DisplayNameFor(model=>model.Address)</th>
+                <th>@Html.DisplayNameFor(model=>model.Email)</th>
+                <th>@Html.DisplayNameFor(model=>model.Department)</th>
+                <th>@Html.DisplayNameFor(model=>model.Mobile)</th>
+                <th>@Html.DisplayNameFor(model=>model.Manager)</th>
+                <th>Options</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+            
+                <tr>
+                <td>@Html.DisplayFor(model => model.Name)</td>
+                <td>@Html.DisplayFor(model => model.Address)</td>
+                <td>@Html.DisplayFor(model => model.Email)</td>
+                <td>@Html.DisplayFor(model => model.Department.Name)</td>
+                <td>@Html.DisplayFor(model => model.Mobile)</td>
+                <td>@Html.DisplayFor(model => model.Manager.Name)</td>
+
+                </tr>
+            
+
+        </tbody>
+
+    </table>
+
+</div>*@
+
+
+
+<div class="container h-100 my-9 py-5">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-6">
+    
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
@@ -46,4 +87,6 @@
             @Html.DisplayFor(model => model.Manager.Name)
         </dd>
     </dl>
+</div>
+</div>
 </div>

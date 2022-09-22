@@ -39,7 +39,7 @@ namespace EmployeeManagementSystem.Models
         [NotMapped]
         public string ConfirmPassword { get; set; }
         
-        [Required]
+      
         public byte? Departmentid { get; set; }
         public string Address { get; set; }
 

@@ -40,6 +40,7 @@ namespace EmployeeManagementSystem.Controllers
         {
             Random r = new Random(); 
             employee.Empid= r.Next(1, 5000);
+           
             if(_repo.EmployeeRegister(employee))
             {
                 ViewBag.message = "Registration Successful and this is your Employee ID :"+employee.Empid;
