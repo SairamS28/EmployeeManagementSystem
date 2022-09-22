@@ -56,6 +56,9 @@
                                <li class="nav-item mx-4">
                                    <a class="nav-link text-dark" asp-action="Display" asp-controller="Department" asp-area="">Department</a>
                                </li>
+                               <li class="nav-item mx-4">
+                                   <a class="nav-link text-dark" asp-action="Logout" asp-area="" asp-controller="Admin"></a>
+                               </li>
                            }
                         }else{
                         <li class="nav-item mx-4">
@@ -64,9 +67,7 @@
                         <li class="nav-item mx-4">
                             <a class="nav-link text-dark" asp-action="Contactus" asp-area="" asp-controller="Home">Contact</a>
                         </li>
-                        <li class="nav-item mx-4">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="login">Admin Login</a>
-                        </li>
+                        
                         <li class="nav-item mx-4">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="register">Sign Up</a>
                         </li>
@@ -97,8 +98,7 @@
             <!-- Copyright -->
             <div class="text-center p-3"
                  style="background-color: rgba(0, 0, 0, 0.2)">
-                © 2020 Copyright:
-                <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                © 2020 Copyright: EMS
             </div>
             <!-- Copyright -->
         </footer>
