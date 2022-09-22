@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using EmployeeManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using EmployeeManagementSystem.Respository.Employees;
+using EmployeeManagementSystem.Respository.Departments;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using EmployeeManagementSystem.Respository.Admins;
 using EmployeeManagementSystem.Respository.Departments;
@@ -34,13 +36,19 @@ namespace EmployeeManagementSystem
 
             services.AddDbContext<EmployeeManagementSystemContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => {
+
                     options.Cookie.Name = "MyCookie";
                     options.LoginPath = "/Employee/login";
                     options.SlidingExpiration = false;
-                   
+
+                    options.Cookie.Name = "MyCookie1";
+                    options.LoginPath = "/Admin/login";
+                    options.SlidingExpiration = false;
+
+                
+
                 });
             services.AddSession(options => { 
                 options.IdleTimeout=TimeSpan.FromMinutes(15);
@@ -54,14 +62,12 @@ namespace EmployeeManagementSystem
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddSession(options=>options.IdleTimeout = TimeSpan.FromMinutes(10));
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
-            //{
-            //    options.Cookie.Name = "MyCookie1";
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+            //    options.Cookie.Name = "MyCookie";
             //    options.LoginPath = "/Admin/login";
             //    options.SlidingExpiration = false;
-
+                
             //});
-
 
 
         }
