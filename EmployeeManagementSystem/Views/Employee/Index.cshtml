@@ -3,6 +3,26 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-<a asp-action="ViewDetails">Details </a>
+
+
+<h2 class="text-center">Welcome @ViewBag.user</h2>
+<div class="card bg-dark text-white image-fluid " ;">
+    <img src="./css/natural-material-stationery-composition.jpg" class="card-img" alt="Stony Beach" style="height:800px" />
+    <div class="card-img-overlay   " style="background-color: rgba(0, 0, 0, 0.3)">
+        <h5 class="card-title text-center  " style="margin-top:225px">Card title</h5>
+        <p class="card-text text-center ">
+            This is a wider card with supporting text below as a natural lead-in to additional
+            content. This content is a little bit longer.
+        </p>
+        <p class="card-text text-center">Last updated 3 mins ago</p>
+    </div>
+</div>
+@*@if (User.Identity.IsAuthenticated)
+{
+    <p>kfldklfdjdlf</p>
+    if (User.IsInRole("Employee"))
+    {
+        <p>This is User</p>
+    }
+}*@
 

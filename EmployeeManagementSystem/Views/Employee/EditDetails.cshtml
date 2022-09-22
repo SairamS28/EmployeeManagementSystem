@@ -4,13 +4,17 @@
     ViewData["Title"] = "EditDetails";
 }
 
-<h1>EditDetails</h1>
 
-<h4>Employee</h4>
-<hr />
+
+
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="UpdateDetails">
+    <div class="col-md-4" 
+    style="
+  left: 0;
+  right: 0;
+  margin: auto; ">
+        <form asp-action="UpdateDetails" class="align-self-center">
+            <h2 class="text-center">Edit Details</h2>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Empid" />
             <input type="hidden" asp-for="Password" />
@@ -53,7 +57,4 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 

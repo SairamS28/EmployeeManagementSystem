@@ -15,7 +15,7 @@ namespace EmployeeManagementSystem.Respository.Employees
         }
         public Employee EmployeeLogin(Login employee)
         {
-            var result = _context.Employee.ToList();
+           
             return _context.Employee.Where(e=>e.Email==employee.email && e.Password==employee.password).FirstOrDefault();
         }
 

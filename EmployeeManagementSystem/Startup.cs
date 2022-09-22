@@ -14,6 +14,8 @@ using EmployeeManagementSystem.Respository.Admins;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using EmployeeManagementSystem.Respository.Employees;
 using EmployeeManagementSystem.Respository.Departments;
+using EmployeeManagementSystem.Respository.Employees;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace EmployeeManagementSystem
 {
@@ -30,8 +32,21 @@ namespace EmployeeManagementSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            services.AddDbContext<EmployeeManagementSystemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
+            services.AddDbContext<EmployeeManagementSystemContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("DbCon")));
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => {
+                    options.Cookie.Name = "MyCookie";
+                    options.LoginPath = "/Employee/login";
+                    options.SlidingExpiration = false;
+                   
+                });
+            services.AddSession(options => { 
+                options.IdleTimeout=TimeSpan.FromMinutes(15);
+                options.Cookie.IsEssential = true;
+               
+            });
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
@@ -66,13 +81,14 @@ namespace EmployeeManagementSystem
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseSession();
-           
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Employee}/{action=Index}/{id?}");
             });
         }
     }
