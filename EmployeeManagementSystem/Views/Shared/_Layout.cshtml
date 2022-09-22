@@ -43,35 +43,7 @@
 <body>
     <header>
 
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div style="" class=" navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1" >
-                        
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            
-                            @*}*@
-                        @*}
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Register">Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Login">Login</a>
-                            </li>
-                        }*@
+
 
 
         <nav class="navbar navbar-expand-lg mx-2 mb-2" style="background-color:rgba(0, 0, 0, 0.2);">
@@ -87,6 +59,9 @@
                                                 </li>
                                                 <li class="nav-item mx-4">
                                                     <a class="nav-link text-dark" asp-action="Display" asp-controller="Department" asp-area="">Department</a>
+                                                </li>
+                                                <li class="nav-item mx-4">
+                                                    <a class="nav-link text-dark" asp-action="Logout" asp-area="" asp-controller="Admin">Logout</a>
                                                 </li>
                                             }else if (User.IsInRole("Employee"))
                                             {
